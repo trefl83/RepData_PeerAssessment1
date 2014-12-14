@@ -60,7 +60,7 @@ hist(steps_per_day, main = "Steps per day", xlab = NA, col = "coral")
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
-The mean of steps taken per day is ``1.0766189 &times; 10<sup>4</sup>`` and the median is ``10765``. 
+The mean of steps taken per day is ``1.0766 &times; 10<sup>4</sup>`` and the median is ``1.0765 &times; 10<sup>4</sup>``. 
 
 ## What is the average daily activity pattern?
 
@@ -137,7 +137,7 @@ hist(steps_per_day_updated, main = "Steps per day after missing data imputation"
 
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
 
-The mean of steps taken per day is now ``1.0766189 &times; 10<sup>4</sup>`` and the median is now ``1.0766189 &times; 10<sup>4</sup>``.
+The mean of steps taken per day is now ``1.0766 &times; 10<sup>4</sup>`` and the median is now ``1.0766 &times; 10<sup>4</sup>``.
 
 As we see, the mean has not changed and the median is slightly higher than before missing data imputation.
 
@@ -147,15 +147,13 @@ Creating a new factor variable in the dataset with two levels ? ?weekday? and ?w
 
 
 ```r
-data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('sobota', 'niedziela'), 'weekend', 'weekday')
+data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('Saturday', 'Sunday'), 'weekend', 'weekday')
 ```
 
 We want to create panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). First of all we need to compute steps average for weekday and weekend.
 
 
 ```r
-data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('Saturday', 'Sunday'), 'weekend', 'weekday')
-
 data_weekday <- data_full[data_full$day_type == 'weekday',]
 data_weekend <- data_full[data_full$day_type == 'weekend',]
 

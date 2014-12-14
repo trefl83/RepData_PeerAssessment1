@@ -46,7 +46,7 @@ Histogram of the total number of steps taken each day.
 hist(steps_per_day, main = "Steps per day", xlab = NA, col = "coral")
 ```
 
-The mean of steps taken per day is ```r mean(steps_per_day, na.rm = TRUE)``` and the median is ```r median(steps_per_day, na.rm = TRUE)```. 
+The mean of steps taken per day is ```r round(mean(steps_per_day, na.rm = TRUE),0)``` and the median is ```r round(median(steps_per_day, na.rm = TRUE))```. 
 
 ## What is the average daily activity pattern?
 
@@ -103,7 +103,7 @@ Updated histogram of the total number of steps taken each day.
 hist(steps_per_day_updated, main = "Steps per day after missing data imputation", xlab = NA, col = "coral")
 ```
 
-The mean of steps taken per day is now ```r mean(steps_per_day_updated, na.rm = TRUE)``` and the median is now ```r median(steps_per_day_updated, na.rm = TRUE)```.
+The mean of steps taken per day is now ```r round(mean(steps_per_day_updated, na.rm = TRUE))``` and the median is now ```r round(median(steps_per_day_updated, na.rm = TRUE))```.
 
 As we see, the mean has not changed and the median is slightly higher than before missing data imputation.
 
@@ -112,14 +112,12 @@ As we see, the mean has not changed and the median is slightly higher than befor
 Creating a new factor variable in the dataset with two levels ? ?weekday? and ?weekend? indicating whether a given date is a weekday or weekend day.
 
 ```{r}
-data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('sobota', 'niedziela'), 'weekend', 'weekday')
+data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('Saturday', 'Sunday'), 'weekend', 'weekday')
 ```
 
 We want to create panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). First of all we need to compute steps average for weekday and weekend.
 
 ```{r}
-data_full$day_type <- ifelse(weekdays(data_full$date) %in% c('Saturday', 'Sunday'), 'weekend', 'weekday')
-
 data_weekday <- data_full[data_full$day_type == 'weekday',]
 data_weekend <- data_full[data_full$day_type == 'weekend',]
 
